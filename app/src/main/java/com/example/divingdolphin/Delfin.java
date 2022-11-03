@@ -1,6 +1,7 @@
 package com.example.divingdolphin;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -9,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 public class Delfin extends View {
     //Creamos el Bitmap Delfin
@@ -34,8 +36,8 @@ public class Delfin extends View {
     //Añadimos el anzuelo que es el enemigo del juego
     private int anzueloX, anzueloY, anzueloVelocidad = 17;
     private Bitmap anzuelo;
-    //Añadimos la variable de la puntuacion
-    private int puntuacionNumero;
+    //Añadimos la variable de la puntuacion y la vida
+    private int puntuacionNumero, vidaDelfin;
 
 
     public Delfin(Context context) {
@@ -61,9 +63,10 @@ public class Delfin extends View {
         vida[1] = BitmapFactory.decodeResource(getResources(), R.drawable.corazonroto2);
 
 
-        //Punto de partida del delfin y inicio de la puntuacion
+        //Punto de partida del delfin y inicio de la puntuacion, numero de vidas
         delfinY = 550;
         puntuacionNumero = 0;
+        vidaDelfin = 3;
     }
 
     @Override
@@ -117,11 +120,19 @@ public class Delfin extends View {
             pezTropicalY = (int) Math.floor(Math.random() * (maxDelfinY - minDelfinY) + minDelfinY);
         }
         canvas.drawBitmap(pezTropical, pezTropicalX, pezTropicalY, null);
-        //Añadimos el metodo del anzuelo y la posicion del anzuelo
+        //Añadimos ANZUELO y la posicion del anzuelo
         anzueloX = anzueloX - anzueloVelocidad;
         if (comerPez(anzueloX, anzueloY)){
             puntuacionNumero = puntuacionNumero - 50;
             anzueloY = -100;
+            vidaDelfin --;
+            if(vidaDelfin == 0){
+                Toast.makeText(getContext(),"Capturado!!😭", Toast.LENGTH_LONG).show();
+                //Al perder los 3 corazones nos manda a la pantalla de Game Over
+                Intent gameOver = new Intent(getContext(), GameOver.class);
+                gameOver.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                getContext().startActivity(gameOver);
+            }
         }
         if(anzueloX < 0){
             anzueloX = canvasWidth + 21;
@@ -129,11 +140,19 @@ public class Delfin extends View {
         }
         canvas.drawBitmap(anzuelo, anzueloX, anzueloY, null);
 
+        //Metodo para hacer que los corazones bajen a medida que comes un anzuelo
+        for(int i=0; i<3;i++){
+            int x = (int) (600 + vida[0].getWidth() * 1.5 * i);
+            int y = 30;
+            if (i < vidaDelfin){
+                canvas.drawBitmap(vida[0], x, y, null);
+            }else{
+                canvas.drawBitmap(vida[1], x, y, null);
+            }
+        }
+
         //Añadimos los corazones y la puntuacion en la pantalla
         canvas.drawText("Puntuación: " + puntuacionNumero, 20, 100, marcadorPuntuacion);
-        canvas.drawBitmap(vida[0], 600, 35, null);
-        canvas.drawBitmap(vida[0], 700, 35, null);
-        canvas.drawBitmap(vida[0], 800, 35, null);
     }
 
     //Creamos el evento de comer los peces
