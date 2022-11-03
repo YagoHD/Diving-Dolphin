@@ -131,6 +131,7 @@ public class Delfin extends View {
                 //Al perder los 3 corazones nos manda a la pantalla de Game Over
                 Intent gameOver = new Intent(getContext(), GameOver.class);
                 gameOver.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                gameOver.putExtra("puntuacion", puntuacionNumero);
                 getContext().startActivity(gameOver);
             }
         }
