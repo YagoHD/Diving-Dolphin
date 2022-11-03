@@ -154,6 +154,31 @@ public class Delfin extends View {
 
         //Añadimos los corazones y la puntuacion en la pantalla
         canvas.drawText("Puntuación: " + puntuacionNumero, 20, 100, marcadorPuntuacion);
+
+        //Creacion de difentes niveles de dificultad
+        if ((puntuacionNumero >= -150) && (puntuacionNumero < 799) ){
+            pezDoradoVelocidad = 14;
+            pezTropicalVelocidad = 17;
+            anzueloVelocidad = 7;
+        }else if((puntuacionNumero >= 700) && (puntuacionNumero < 850)) {
+            imagenDeFondo = BitmapFactory.decodeResource(getResources(), R.drawable.fondo2);
+        }else if((puntuacionNumero >= 850) && (puntuacionNumero < 1599)){
+            pezDoradoVelocidad = 6;
+            pezTropicalVelocidad = 12;
+            anzueloVelocidad = 20;
+        }else if((puntuacionNumero >= 1600) && (puntuacionNumero < 1650)){
+            imagenDeFondo = BitmapFactory.decodeResource(getResources(), R.drawable.fondo2);
+        }else if((puntuacionNumero >= 1650) && (puntuacionNumero < 2399)){
+            pezDoradoVelocidad = 18;
+            pezTropicalVelocidad = 10;
+            anzueloVelocidad = 25;
+        }else if((puntuacionNumero >= 2400) && (puntuacionNumero < 2450)){
+            imagenDeFondo = BitmapFactory.decodeResource(getResources(), R.drawable.fondo1);
+        }else if((puntuacionNumero >= 2450) && (puntuacionNumero < 999999)){
+            pezDoradoVelocidad = 17;
+            pezTropicalVelocidad = 7;
+            anzueloVelocidad = 27;
+        }
     }
 
     //Creamos el evento de comer los peces
