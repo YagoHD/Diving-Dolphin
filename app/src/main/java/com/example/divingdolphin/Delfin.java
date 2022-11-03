@@ -26,6 +26,16 @@ public class Delfin extends View {
     private Bitmap vida[] = new Bitmap[2];
     //Creacion del toque en la pantalla
     private boolean click = false;
+    //Añadimos los peces que seran la comida y la manera de conseguir puntos
+    private int pezTropicalX, pezTropicalY, pezTropicalVelocidad = 7;
+    private int pezDoradoX, pezDoradoY, pezDoradoVelocidad = 14;
+    private Bitmap pezDorado;
+    private Bitmap pezTropical;
+    //Añadimos el anzuelo que es el enemigo del juego
+    private int anzueloX, anzueloY, anzueloVelocidad = 17;
+    private Bitmap anzuelo;
+    //Añadimos la variable de la puntuacion
+    private int puntuacionNumero;
 
 
     public Delfin(Context context) {
@@ -36,6 +46,11 @@ public class Delfin extends View {
         delfin[1] = BitmapFactory.decodeResource(getResources(), R.drawable.delfinabajo);
         //Instanciamos la imagen de fondo
         imagenDeFondo = BitmapFactory.decodeResource(getResources(), R.drawable.fondo1);
+        //Instanciamos los pedez/comida
+        pezDorado = BitmapFactory.decodeResource(getResources(), R.drawable.pezdorado);
+        pezTropical = BitmapFactory.decodeResource(getResources(), R.drawable.pez);
+        //Instanciamos el anzuelo
+        anzuelo = BitmapFactory.decodeResource(getResources(),R.drawable.anzuelo);
         //Instanciamos el marcador de puntuacion
         marcadorPuntuacion.setColor(Color.WHITE);
         marcadorPuntuacion.setTextSize(70);
@@ -44,8 +59,11 @@ public class Delfin extends View {
         //Instanciamos la vida
         vida[0] = BitmapFactory.decodeResource(getResources(), R.drawable.corazonredimensionado);
         vida[1] = BitmapFactory.decodeResource(getResources(), R.drawable.corazonroto2);
-        //Punto de partida del delfin
+
+
+        //Punto de partida del delfin y inicio de la puntuacion
         delfinY = 550;
+        puntuacionNumero = 0;
     }
 
     @Override
@@ -75,12 +93,55 @@ public class Delfin extends View {
         }else{
         canvas.drawBitmap(delfin[0], delfinX, delfinY, null);
         }
+        //Añadimos posicion de los peces
+        pezDoradoX = pezDoradoX - pezDoradoVelocidad;
+        pezTropicalX = pezTropicalX - pezTropicalVelocidad;
+        //Añadimos el metodo de comer los peces
+        //PEZ DORADO
+        if (comerPez(pezDoradoX, pezDoradoY)){
+            puntuacionNumero = puntuacionNumero + 50;
+            pezDoradoY = -100;
+        }
+        if(pezDoradoX < 0){
+            pezDoradoX = canvasWidth + 21;
+            pezDoradoY = (int) Math.floor(Math.random() * (maxDelfinY - minDelfinY) + minDelfinY);
+        }
+        canvas.drawBitmap(pezDorado, pezDoradoX, pezDoradoY, null);
+        //PEZ TROPICAL
+        if (comerPez(pezTropicalX, pezTropicalY)){
+            puntuacionNumero = puntuacionNumero + 10;
+            pezTropicalY = -100;
+        }
+        if(pezTropicalX < 0){
+            pezTropicalX = canvasWidth + 21;
+            pezTropicalY = (int) Math.floor(Math.random() * (maxDelfinY - minDelfinY) + minDelfinY);
+        }
+        canvas.drawBitmap(pezTropical, pezTropicalX, pezTropicalY, null);
+        //Añadimos el metodo del anzuelo y la posicion del anzuelo
+        anzueloX = anzueloX - anzueloVelocidad;
+        if (comerPez(anzueloX, anzueloY)){
+            puntuacionNumero = puntuacionNumero - 50;
+            anzueloY = -100;
+        }
+        if(anzueloX < 0){
+            anzueloX = canvasWidth + 21;
+            anzueloY = (int) Math.floor(Math.random() * (maxDelfinY - minDelfinY) + minDelfinY);
+        }
+        canvas.drawBitmap(anzuelo, anzueloX, anzueloY, null);
 
         //Añadimos los corazones y la puntuacion en la pantalla
-        canvas.drawText("Puntuación: ", 20, 100, marcadorPuntuacion);
+        canvas.drawText("Puntuación: " + puntuacionNumero, 20, 100, marcadorPuntuacion);
         canvas.drawBitmap(vida[0], 600, 35, null);
         canvas.drawBitmap(vida[0], 700, 35, null);
         canvas.drawBitmap(vida[0], 800, 35, null);
+    }
+
+    //Creamos el evento de comer los peces
+    public boolean comerPez(int x, int y){
+        if (delfinX < x && x <(delfinX + delfin[0].getWidth()) && delfinY < y && y < (delfinY + delfin[0].getHeight())){
+            return true;
+        }
+        return false;
     }
 
     //Creamos el evento de cuando clicamos en pantalla y el delfin suba
