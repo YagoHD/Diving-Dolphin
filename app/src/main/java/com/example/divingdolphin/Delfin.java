@@ -65,7 +65,7 @@ public class Delfin extends View {
 
         //Punto de partida del delfin y inicio de la puntuacion, numero de vidas
         delfinY = 550;
-        puntuacionNumero = 0;
+        puntuacionNumero = 700;
         vidaDelfin = 3;
     }
 
@@ -161,19 +161,30 @@ public class Delfin extends View {
             pezTropicalVelocidad = 17;
             anzueloVelocidad = 7;
         }else if((puntuacionNumero >= 700) && (puntuacionNumero < 850)) {
-            imagenDeFondo = BitmapFactory.decodeResource(getResources(), R.drawable.fondo2);
+            Toast.makeText(getContext(),"Profundidades", Toast.LENGTH_LONG).show();
+            imagenDeFondo = BitmapFactory.decodeResource(getResources(), R.drawable.profundidades);
+            pezDorado = BitmapFactory.decodeResource(getResources(), R.drawable.dorado2);
+            pezTropical = BitmapFactory.decodeResource(getResources(), R.drawable.pez2);
         }else if((puntuacionNumero >= 850) && (puntuacionNumero < 1599)){
             pezDoradoVelocidad = 6;
             pezTropicalVelocidad = 12;
             anzueloVelocidad = 20;
         }else if((puntuacionNumero >= 1600) && (puntuacionNumero < 1650)){
-            imagenDeFondo = BitmapFactory.decodeResource(getResources(), R.drawable.fondo2);
+            Toast.makeText(getContext(),"Abismo", Toast.LENGTH_LONG).show();
+            imagenDeFondo = BitmapFactory.decodeResource(getResources(), R.drawable.abismo);
+            pezDorado = BitmapFactory.decodeResource(getResources(), R.drawable.dorado3);
+            pezTropical = BitmapFactory.decodeResource(getResources(), R.drawable.pez3);
+            anzuelo = BitmapFactory.decodeResource(getResources(), R.drawable.ancla1);
         }else if((puntuacionNumero >= 1650) && (puntuacionNumero < 2399)){
             pezDoradoVelocidad = 18;
             pezTropicalVelocidad = 10;
             anzueloVelocidad = 25;
         }else if((puntuacionNumero >= 2400) && (puntuacionNumero < 2450)){
-            imagenDeFondo = BitmapFactory.decodeResource(getResources(), R.drawable.fondo1);
+            imagenDeFondo = BitmapFactory.decodeResource(getResources(), R.drawable.infierno);
+            pezDorado = BitmapFactory.decodeResource(getResources(), R.drawable.dorado4);
+            pezTropical = BitmapFactory.decodeResource(getResources(), R.drawable.pez4);
+            anzuelo = BitmapFactory.decodeResource(getResources(), R.drawable.ancla2);
+            Toast.makeText(getContext(),"¡Infierno!", Toast.LENGTH_LONG).show();
         }else if((puntuacionNumero >= 2450) && (puntuacionNumero < 999999)){
             pezDoradoVelocidad = 17;
             pezTropicalVelocidad = 7;
