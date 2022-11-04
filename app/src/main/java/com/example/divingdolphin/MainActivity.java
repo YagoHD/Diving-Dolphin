@@ -2,8 +2,12 @@ package com.example.divingdolphin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.TextView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -14,10 +18,21 @@ public class MainActivity extends AppCompatActivity {
     private Delfin personajeDelfin;
     private Handler handler = new Handler();
     private final static long Interval = 30;
+    MediaPlayer mp;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+            mp = MediaPlayer.create(this,R.raw.infierno);
+            mp.start();
+
+        //    mp = MediaPlayer.create(this,R.raw.infierno);
+        //    mp.start();
+
+
 
         personajeDelfin = new Delfin(this);
         setContentView(personajeDelfin);

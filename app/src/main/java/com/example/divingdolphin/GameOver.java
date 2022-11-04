@@ -29,7 +29,6 @@ public class GameOver extends AppCompatActivity {
         empezarJuego = (Button) findViewById(R.id.playAgain);
         puntuacion = (TextView) findViewById(R.id.textoPuntuacion);
 
-
         empezarJuego.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

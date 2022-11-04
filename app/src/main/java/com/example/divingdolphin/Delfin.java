@@ -8,6 +8,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -43,6 +46,7 @@ public class Delfin extends View {
     public Delfin(Context context) {
         super(context);
 
+
         //Instanciamos el bitmap del delfin
         delfin[0] = BitmapFactory.decodeResource(getResources(), R.drawable.delfinarriba);
         delfin[1] = BitmapFactory.decodeResource(getResources(), R.drawable.delfinabajo);
@@ -65,7 +69,7 @@ public class Delfin extends View {
 
         //Punto de partida del delfin y inicio de la puntuacion, numero de vidas
         delfinY = 550;
-        puntuacionNumero = 700;
+        puntuacionNumero = 0;
         vidaDelfin = 3;
     }
 
