@@ -45,7 +45,7 @@ public class GameOver extends AppCompatActivity {
                 startActivity(mainIntent);
             }
         });
-        puntuacion.setText("Puntuacion: " + puntuacionStr);
+        puntuacion.setText(puntuacionStr);
     }
     protected void onPause() {
         super.onPause();
