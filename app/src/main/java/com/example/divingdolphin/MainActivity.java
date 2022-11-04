@@ -18,20 +18,21 @@ public class MainActivity extends AppCompatActivity {
     private Delfin personajeDelfin;
     private Handler handler = new Handler();
     private final static long Interval = 30;
+
+    //Repodductor de musica
     MediaPlayer mp;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-            mp = MediaPlayer.create(this,R.raw.infierno);
-            mp.start();
 
-        //    mp = MediaPlayer.create(this,R.raw.infierno);
-        //    mp.start();
 
+        mp = MediaPlayer.create(this,R.raw.infierno);
+        if (mp.isPlaying()){
+            mp.stop();
+        }
+        mp.start();
 
 
         personajeDelfin = new Delfin(this);
@@ -50,5 +51,11 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         },0, Interval);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mp.stop();
     }
 }

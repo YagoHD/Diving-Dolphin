@@ -127,7 +127,6 @@ public class Delfin extends View {
         //Añadimos ANZUELO y la posicion del anzuelo
         anzueloX = anzueloX - anzueloVelocidad;
         if (comerPez(anzueloX, anzueloY)){
-            puntuacionNumero = puntuacionNumero - 50;
             anzueloY = -100;
             vidaDelfin --;
             if(vidaDelfin == 0){
@@ -165,7 +164,6 @@ public class Delfin extends View {
             pezTropicalVelocidad = 17;
             anzueloVelocidad = 7;
         }else if((puntuacionNumero >= 700) && (puntuacionNumero < 850)) {
-            Toast.makeText(getContext(),"Profundidades", Toast.LENGTH_LONG).show();
             imagenDeFondo = BitmapFactory.decodeResource(getResources(), R.drawable.profundidades);
             pezDorado = BitmapFactory.decodeResource(getResources(), R.drawable.dorado2);
             pezTropical = BitmapFactory.decodeResource(getResources(), R.drawable.pez2);
@@ -174,7 +172,6 @@ public class Delfin extends View {
             pezTropicalVelocidad = 12;
             anzueloVelocidad = 20;
         }else if((puntuacionNumero >= 1600) && (puntuacionNumero < 1650)){
-            Toast.makeText(getContext(),"Abismo", Toast.LENGTH_LONG).show();
             imagenDeFondo = BitmapFactory.decodeResource(getResources(), R.drawable.abismo);
             pezDorado = BitmapFactory.decodeResource(getResources(), R.drawable.dorado3);
             pezTropical = BitmapFactory.decodeResource(getResources(), R.drawable.pez3);
@@ -188,7 +185,6 @@ public class Delfin extends View {
             pezDorado = BitmapFactory.decodeResource(getResources(), R.drawable.dorado4);
             pezTropical = BitmapFactory.decodeResource(getResources(), R.drawable.pez4);
             anzuelo = BitmapFactory.decodeResource(getResources(), R.drawable.ancla2);
-            Toast.makeText(getContext(),"¡Infierno!", Toast.LENGTH_LONG).show();
         }else if((puntuacionNumero >= 2450) && (puntuacionNumero < 999999)){
             pezDoradoVelocidad = 17;
             pezTropicalVelocidad = 7;
