@@ -19,9 +19,9 @@
     <TextView
         android:id="@+id/tituloJuego"
         android:layout_width="match_parent"
-        android:shadowColor="@color/teal_700"
-        android:shadowRadius="20"
-        android:textColor="#87CEF7"
+        android:shadowColor="@color/white"
+        android:shadowRadius="30"
+        android:textColor="#2196F3"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textAlignment="center"

@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        mp = MediaPlayer.create(this,R.raw.infierno);
+        mp = MediaPlayer.create(this,R.raw.musicagameplay);
         if (mp.isPlaying()){
             mp.stop();
         }
