@@ -26,14 +26,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         mp = MediaPlayer.create(this,R.raw.musicagameplay);
         if (mp.isPlaying()){
             mp.stop();
         }
         mp.start();
-
 
         personajeDelfin = new Delfin(this);
         setContentView(personajeDelfin);

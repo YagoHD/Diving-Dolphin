@@ -8,14 +8,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.SoundPool;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
 public class Delfin extends View {
+    //Medimos el tamaño de la pantalla para ajustar la velocidad de los elementos
+    int anchoPantallaVelocidad = getResources().getDisplayMetrics().widthPixels;
+
     //Creamos el Bitmap Delfin
     private Bitmap delfin[] = new Bitmap[2];
     private int delfinX = 10;
@@ -59,7 +60,9 @@ public class Delfin extends View {
         anzuelo = BitmapFactory.decodeResource(getResources(),R.drawable.anzuelo);
         //Instanciamos el marcador de puntuacion
         marcadorPuntuacion.setColor(Color.WHITE);
-        marcadorPuntuacion.setTextSize(70);
+        final float TAMANHO = 16.0f;
+        final float escala = getContext().getResources().getDisplayMetrics().density;
+        marcadorPuntuacion.setTextSize((int) (TAMANHO * escala + 0.5f));
         marcadorPuntuacion.setTypeface(Typeface.DEFAULT_BOLD);
         marcadorPuntuacion.setAntiAlias(true);
         //Instanciamos la vida
@@ -84,7 +87,7 @@ public class Delfin extends View {
         canvas.drawBitmap(imagenDeFondo,0,0,null);
         //Añadimos y posidionamos el delfin a la pantalla
         int minDelfinY = delfin[0].getHeight();
-        int maxDelfinY = canvasHeight - delfin[0].getHeight() * 3;
+        int maxDelfinY = canvasHeight - delfin[0].getHeight();
         delfinY = delfinY + velocidadDelfin;
 
         if (delfinY < minDelfinY){
@@ -107,7 +110,7 @@ public class Delfin extends View {
         //PEZ DORADO
         if (comerPez(pezDoradoX, pezDoradoY)){
             puntuacionNumero = puntuacionNumero + 50;
-            pezDoradoY = -100;
+            pezDoradoY = -1000;
         }
         if(pezDoradoX < 0){
             pezDoradoX = canvasWidth + 21;
@@ -117,7 +120,7 @@ public class Delfin extends View {
         //PEZ TROPICAL
         if (comerPez(pezTropicalX, pezTropicalY)){
             puntuacionNumero = puntuacionNumero + 10;
-            pezTropicalY = -100;
+            pezTropicalY = -1000;
         }
         if(pezTropicalX < 0){
             pezTropicalX = canvasWidth + 21;
@@ -127,7 +130,7 @@ public class Delfin extends View {
         //Añadimos ANZUELO y la posicion del anzuelo
         anzueloX = anzueloX - anzueloVelocidad;
         if (comerPez(anzueloX, anzueloY)){
-            anzueloY = -100;
+            anzueloY = -1000;
             vidaDelfin --;
             if(vidaDelfin == 0){
                 Toast.makeText(getContext(),"Capturado!!😭", Toast.LENGTH_LONG).show();
@@ -146,8 +149,8 @@ public class Delfin extends View {
 
         //Metodo para hacer que los corazones bajen a medida que comes un anzuelo
         for(int i=0; i<3;i++){
-            int x = (int) (600 + vida[0].getWidth() * 1.5 * i);
-            int y = 30;
+            int x = (int) (0 + vida[0].getWidth() * 1.5 * i);
+            int y = 0;
             if (i < vidaDelfin){
                 canvas.drawBitmap(vida[0], x, y, null);
             }else{
@@ -156,39 +159,99 @@ public class Delfin extends View {
         }
 
         //Añadimos los corazones y la puntuacion en la pantalla
-        canvas.drawText("Puntuación: " + puntuacionNumero, 20, 100, marcadorPuntuacion);
+        canvas.drawText("Puntuación: " + puntuacionNumero, 20, vida[0].getHeight() + 25, marcadorPuntuacion);
 
         //Creacion de difentes niveles de dificultad
+        Log.d("anchodepantalla", String.valueOf(anzueloVelocidad));
+
+
         if ((puntuacionNumero >= -150) && (puntuacionNumero < 799) ){
-            pezDoradoVelocidad = 14;
-            pezTropicalVelocidad = 17;
-            anzueloVelocidad = 7;
+            if((anchoPantallaVelocidad >=1080) && (anchoPantallaVelocidad<2200)){
+                pezDoradoVelocidad = 15;
+                pezTropicalVelocidad = 17;
+                anzueloVelocidad = 8;
+            } else if ((anchoPantallaVelocidad >=480) && (anchoPantallaVelocidad<1080)) {
+                pezDoradoVelocidad = 7;
+                pezTropicalVelocidad = 8;
+                anzueloVelocidad = 4;
+            } else if (anchoPantallaVelocidad<480){
+                pezDoradoVelocidad = 3;
+                pezTropicalVelocidad = 4;
+                anzueloVelocidad = 2;
+            } else if(anchoPantallaVelocidad >= 2200){
+                pezDoradoVelocidad = 20;
+                pezTropicalVelocidad = 22;
+                anzueloVelocidad = 13;
+            }
+
         }else if((puntuacionNumero >= 700) && (puntuacionNumero < 850)) {
             imagenDeFondo = BitmapFactory.decodeResource(getResources(), R.drawable.profundidades);
             pezDorado = BitmapFactory.decodeResource(getResources(), R.drawable.dorado2);
             pezTropical = BitmapFactory.decodeResource(getResources(), R.drawable.pez2);
         }else if((puntuacionNumero >= 850) && (puntuacionNumero < 1599)){
-            pezDoradoVelocidad = 6;
-            pezTropicalVelocidad = 12;
-            anzueloVelocidad = 20;
+            if((anchoPantallaVelocidad >=1080) && (anchoPantallaVelocidad<2200)){
+                pezDoradoVelocidad = 6;
+                pezTropicalVelocidad = 12;
+                anzueloVelocidad = 12;
+            } else if ((anchoPantallaVelocidad >=480) && (anchoPantallaVelocidad<1080)) {
+                pezDoradoVelocidad = 3;
+                pezTropicalVelocidad = 4;
+                anzueloVelocidad = 5;
+            } else if (anchoPantallaVelocidad<480){
+                pezDoradoVelocidad = 2;
+                pezTropicalVelocidad = 2;
+                anzueloVelocidad = 2;
+            } else if(anchoPantallaVelocidad >= 2200){
+                pezDoradoVelocidad = 11;
+                pezTropicalVelocidad = 17;
+                anzueloVelocidad = 17;
+            }
         }else if((puntuacionNumero >= 1600) && (puntuacionNumero < 1650)){
             imagenDeFondo = BitmapFactory.decodeResource(getResources(), R.drawable.abismo);
             pezDorado = BitmapFactory.decodeResource(getResources(), R.drawable.dorado3);
             pezTropical = BitmapFactory.decodeResource(getResources(), R.drawable.pez3);
             anzuelo = BitmapFactory.decodeResource(getResources(), R.drawable.ancla1);
         }else if((puntuacionNumero >= 1650) && (puntuacionNumero < 2399)){
-            pezDoradoVelocidad = 18;
-            pezTropicalVelocidad = 10;
-            anzueloVelocidad = 25;
+            if((anchoPantallaVelocidad >=1080) && (anchoPantallaVelocidad<2200)){
+                pezDoradoVelocidad = 18;
+                pezTropicalVelocidad = 12;
+                anzueloVelocidad = 25;
+            } else if ((anchoPantallaVelocidad >=480) && (anchoPantallaVelocidad<1080)) {
+                pezDoradoVelocidad = 9;
+                pezTropicalVelocidad = 5;
+                anzueloVelocidad = 12;
+            } else if (anchoPantallaVelocidad<480){
+                pezDoradoVelocidad = 4;
+                pezTropicalVelocidad = 2;
+                anzueloVelocidad = 2;
+            } else if(anchoPantallaVelocidad >= 2200){
+                pezDoradoVelocidad = 23;
+                pezTropicalVelocidad = 17;
+                anzueloVelocidad = 30;
+            }
         }else if((puntuacionNumero >= 2400) && (puntuacionNumero < 2450)){
             imagenDeFondo = BitmapFactory.decodeResource(getResources(), R.drawable.infierno);
             pezDorado = BitmapFactory.decodeResource(getResources(), R.drawable.dorado4);
             pezTropical = BitmapFactory.decodeResource(getResources(), R.drawable.pez4);
             anzuelo = BitmapFactory.decodeResource(getResources(), R.drawable.ancla2);
         }else if((puntuacionNumero >= 2450) && (puntuacionNumero < 999999)){
-            pezDoradoVelocidad = 17;
-            pezTropicalVelocidad = 7;
-            anzueloVelocidad = 27;
+            if((anchoPantallaVelocidad >=1080) && (anchoPantallaVelocidad<2200)){
+                pezDoradoVelocidad = 17;
+                pezTropicalVelocidad = 7;
+                anzueloVelocidad = 27;
+            } else if ((anchoPantallaVelocidad >=480) && (anchoPantallaVelocidad<1080)) {
+                pezDoradoVelocidad = 8;
+                pezTropicalVelocidad = 4;
+                anzueloVelocidad = 13;
+            } else if (anchoPantallaVelocidad<480){
+                pezDoradoVelocidad = 5;
+                pezTropicalVelocidad = 4;
+                anzueloVelocidad = 3;
+            } else if(anchoPantallaVelocidad >= 2200){
+                pezDoradoVelocidad = 22;
+                pezTropicalVelocidad = 12;
+                anzueloVelocidad = 32;
+            }
         }
     }
 
@@ -205,7 +268,16 @@ public class Delfin extends View {
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN){
             click = true;
-            velocidadDelfin = -21;
+
+            if((anchoPantallaVelocidad >=1080) && (anchoPantallaVelocidad<2200)){
+                velocidadDelfin = -30;
+            } else if ((anchoPantallaVelocidad >=480) && (anchoPantallaVelocidad<1080)) {
+                velocidadDelfin = -21;
+            } else if (anchoPantallaVelocidad<480){
+                velocidadDelfin = -13;
+            } else if(anchoPantallaVelocidad >= 2200){
+                velocidadDelfin = -40;
+            }
         }
         return true;
     }
