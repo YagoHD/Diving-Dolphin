@@ -46,8 +46,7 @@ public class Delfin extends View {
 
     public Delfin(Context context) {
         super(context);
-
-
+        
         //Instanciamos el bitmap del delfin
         delfin[0] = BitmapFactory.decodeResource(getResources(), R.drawable.delfinarriba);
         delfin[1] = BitmapFactory.decodeResource(getResources(), R.drawable.delfinabajo);
@@ -188,6 +187,7 @@ public class Delfin extends View {
             imagenDeFondo = BitmapFactory.decodeResource(getResources(), R.drawable.profundidades);
             pezDorado = BitmapFactory.decodeResource(getResources(), R.drawable.dorado2);
             pezTropical = BitmapFactory.decodeResource(getResources(), R.drawable.pez2);
+
         }else if((puntuacionNumero >= 850) && (puntuacionNumero < 1599)){
             if((anchoPantallaVelocidad >=1080) && (anchoPantallaVelocidad<2200)){
                 pezDoradoVelocidad = 6;
