@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imagenInicio"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="300sp"
+        android:layout_height="300sp"
         android:layout_below="@+id/tituloJuego"
         android:src="@drawable/delfininicio"
         android:layout_centerHorizontal="true"
@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/tituloJuego"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:shadowColor="@color/white"
         android:shadowRadius="30"
         android:textColor="#2196F3"
@@ -26,8 +26,8 @@
         android:text="@string/app_name"
         android:textAlignment="center"
         android:textStyle="bold"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30sp"
         android:textSize="50sp"/>
 
 
