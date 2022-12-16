@@ -19,7 +19,6 @@ public class GameOver extends AppCompatActivity {
     private String puntuacionStr;
     MediaPlayer mp;
 
-
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,6 @@ public class GameOver extends AppCompatActivity {
         }
 
         mp.start();
-
 
         puntuacionStr = getIntent().getExtras().get("puntuacion").toString();
         empezarJuego = (Button) findViewById(R.id.playAgain);

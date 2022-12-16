@@ -9,46 +9,43 @@
 
     <TextView
         android:id="@+id/textoGameOver"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="0sp"
         android:shadowColor="@color/teal_700"
         android:shadowRadius="20"
         android:textColor="#87CEF7"
         android:text="@string/gameOver"
-        android:textAlignment="center"
-        android:textSize="70dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="60sp"
         android:textStyle="bold" />
 
     <Button
         android:id="@+id/playAgain"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textoPuntuacion"
         android:layout_centerHorizontal="true"
-
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20sp"
         android:background="#8AD2FC"
-        android:padding="10dp"
+        android:padding="10sp"
         android:shadowColor="@color/teal_700"
         android:shadowRadius="10"
         android:text="@string/JugarDeNuevo"
         android:textAllCaps="false"
         android:textColor="#304FFE"
-        android:textSize="18dp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textoPuntuacionn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/delfin"
-        android:layout_marginTop="5dp"
+        android:layout_below="@+id/textoGameOver"
+        android:layout_marginTop="5sp"
         android:shadowColor="@color/teal_700"
         android:shadowRadius="20"
         android:layout_centerHorizontal="true"
-
         android:text="Puntuacion"
         android:textAlignment="center"
         android:textColor="#87CEF7"
@@ -61,8 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textoPuntuacionn"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="6dp"
-
+        android:layout_marginTop="6sp"
         android:shadowColor="@color/teal_700"
         android:shadowRadius="20"
         android:text=""
@@ -70,15 +66,15 @@
         android:textColor="#87CEF7"
         android:textSize="30sp"
         android:textStyle="bold" />
-
     <ImageView
         android:id="@+id/delfin"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-
-        android:layout_below="@+id/textoGameOver"
+        android:layout_width="200sp"
+        android:layout_height="200sp"
+        android:layout_below="@+id/playAgain"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="20sp"
         app:srcCompat="@drawable/delfingameover" />
+
+
 
 </RelativeLayout>
