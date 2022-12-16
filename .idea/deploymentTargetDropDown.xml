@@ -7,11 +7,11 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\yagor\.android\avd\3.7_FWVGA_slider_API_33.avd" />
+            <value value="C:\Users\yagor\.android\avd\minimo.avd" />
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2022-12-16T12:56:35.661943500Z" />
+    <timeTargetWasSelectedWithDropDown value="2022-12-16T13:03:58.019548800Z" />
   </component>
 </project>
