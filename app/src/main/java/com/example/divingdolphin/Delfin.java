@@ -46,7 +46,7 @@ public class Delfin extends View {
 
     public Delfin(Context context) {
         super(context);
-        
+
         //Instanciamos el bitmap del delfin
         delfin[0] = BitmapFactory.decodeResource(getResources(), R.drawable.delfinarriba);
         delfin[1] = BitmapFactory.decodeResource(getResources(), R.drawable.delfinabajo);
