@@ -47,7 +47,11 @@ public class GameOver extends AppCompatActivity {
     }
     protected void onPause() {
         super.onPause();
-        finish();
+        mp.pause();
+    }
+    public void onResume() {
+        super.onResume();
+        mp.start();
     }
     @Override
     protected void onDestroy() {

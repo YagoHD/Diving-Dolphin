@@ -49,7 +49,17 @@ public class MainActivity extends AppCompatActivity {
             }
         },0, Interval);
     }
+    @Override
+    public void onPause() {
+        super.onPause();
+        mp.pause();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mp.start();
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
